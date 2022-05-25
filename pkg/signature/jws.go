@@ -6,7 +6,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/notaryproject/notation-go/crypto/cryptoutil"
+	corex509 "github.com/notaryproject/notation-core-go/x509"
 	"github.com/notaryproject/notation-go/signature/jws"
 )
 
@@ -39,7 +39,7 @@ func NewSignerFromFiles(keyPath, certPath string) (*jws.Signer, error) {
 	}
 
 	// parse cert
-	certs, err := cryptoutil.ParseCertificatePEM(certPEM)
+	certs, err := corex509.ParseCertificatePEM(certPEM)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func NewSignerFromFiles(keyPath, certPath string) (*jws.Signer, error) {
 func NewVerifierFromFiles(certPaths []string) (*jws.Verifier, error) {
 	roots := x509.NewCertPool()
 	for _, path := range certPaths {
-		bundledCerts, err := cryptoutil.ReadCertificateFile(path)
+		bundledCerts, err := corex509.ReadCertificateFile(path)
 		if err != nil {
 			return nil, err
 		}

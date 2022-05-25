@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/notaryproject/notation-go/crypto/cryptoutil"
+	"github.com/notaryproject/notation-core-go/x509"
 	"github.com/notaryproject/notation/pkg/config"
 	"github.com/urfave/cli/v2"
 )
@@ -101,7 +101,7 @@ func addCert(ctx *cli.Context) error {
 	}
 
 	// check if the target path is a cert
-	if _, err := cryptoutil.ReadCertificateFile(path); err != nil {
+	if _, err := x509.ReadCertificateFile(path); err != nil {
 		return err
 	}
 
