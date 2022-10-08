@@ -44,7 +44,7 @@ func runVerify(command *cobra.Command, opts *verifyOpts) error {
 	if _, err := verifier.Verify(command.Context(), opts.reference); err != nil {
 		return err
 	} else {
-		fmt.Println("successfully verified the reference :" + opts.reference)
+		fmt.Println("successfully verified the reference : " + opts.reference)
 	}
 
 	return nil
@@ -61,7 +61,10 @@ func getVerifier(opts *verifyOpts) (*verification.Verifier, error) {
 		return nil, err
 	}
 
-	verifier, _ := verification.NewVerifier(repository)
+	verifier, err := verification.NewVerifier(repository)
+	if err != nil {
+		return nil, err
+	}
 
 	return verifier, nil
 }
